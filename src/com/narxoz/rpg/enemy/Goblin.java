@@ -98,6 +98,21 @@ public class Goblin implements Enemy {
         // TODO: Display loot table
     }
 
+    public int getDamage(){
+        return this.damage;
+    }
+    public int getDefense(){
+        return this.defense;
+    }
+    public int getSpeed(){
+        return this.speed;
+    }
+    public List<Ability> getAbilities() {
+        return abilities;
+    }
+    public LootTable getLootTable() {
+        return lootTable;
+    }
     // TODO: Implement clone() for Prototype pattern
     // This is CRITICAL! You must deep copy:
     //   - The abilities list (create new list, clone each ability)
@@ -115,6 +130,12 @@ public class Goblin implements Enemy {
     //     copy.lootTable = ???  // DEEP COPY!
     //     return copy;
     // }
+
+
+    @Override
+    public Enemy clone(){
+        throw  new UnsupportedOperationException("Not implemented yet");
+    }
 
     // TODO: Add helper methods for Prototype variant creation
     // Consider methods like:
