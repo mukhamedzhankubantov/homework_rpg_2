@@ -1,5 +1,7 @@
 package com.narxoz.rpg.loot;
 
+import java.util.List;
+
 /**
  * Interface for enemy loot/drop tables in the RPG system.
  *
@@ -41,5 +43,10 @@ public interface LootTable {
     // - int getExperienceDrop()
     // - String getLootInfo()
     // - LootTable clone()  <-- IMPORTANT for deep copying!
+
+    List<String> getItems();
+    int getGoldDrop();
+    int getExperienceDrop();
+    LootTable clone();
 
 }
