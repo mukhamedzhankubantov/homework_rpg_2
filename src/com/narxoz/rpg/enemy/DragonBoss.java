@@ -168,6 +168,32 @@ public class DragonBoss implements Enemy {
     //
     // This is more complex than Goblin.clone()!
     // That's the challenge of Prototype with complex objects.
+    @Override
+    public Enemy clone() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+    @Override
+    public int getDamage() {
+        return damage;
+    }
+    @Override
+    public int getDefense() {
+        return defense;
+    }
+    @Override
+    public int getSpeed() {
+        return speed;
+    }
+    @Override
+    public List<Ability> getAbilities() {
+        return abilities;
+    }
+    @Override
+    public LootTable getLootTable() {
+        return lootTable;
+    }
+
+
 
     // TODO: Add helper methods for variant creation
     // - void setElement(String element) — for elemental variants
