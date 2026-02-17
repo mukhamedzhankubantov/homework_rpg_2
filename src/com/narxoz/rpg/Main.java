@@ -1,5 +1,11 @@
 package com.narxoz.rpg;
 
+import com.narxoz.rpg.builder.BossEnemyBuilder;
+import com.narxoz.rpg.builder.EnemyDirector;
+import com.narxoz.rpg.enemy.Enemy;
+import com.narxoz.rpg.factory.EnemyComponentFactory;
+import com.narxoz.rpg.factory.FireComponentFactory;
+
 /**
  * Main demonstration class for the RPG Enemy System.
  *
@@ -105,6 +111,11 @@ public class Main {
         System.out.println("============================================\n");
 
         // Your Builder demonstration here...
+        EnemyComponentFactory fireFactory = new FireComponentFactory();
+        EnemyDirector director = new EnemyDirector(new BossEnemyBuilder());
+
+        Enemy raidBoss = director.createRaidBoss(fireFactory);
+        raidBoss.displayInfo();
 
 
         // ============================================================
