@@ -2,9 +2,12 @@ package com.narxoz.rpg;
 
 import com.narxoz.rpg.builder.BossEnemyBuilder;
 import com.narxoz.rpg.builder.EnemyDirector;
+import com.narxoz.rpg.combat.FrostBreath;
 import com.narxoz.rpg.enemy.Enemy;
+import com.narxoz.rpg.enemy.Goblin;
 import com.narxoz.rpg.factory.EnemyComponentFactory;
 import com.narxoz.rpg.factory.FireComponentFactory;
+import com.narxoz.rpg.prototype.EnemyRegistry;
 
 /**
  * Main demonstration class for the RPG Enemy System.
@@ -146,7 +149,16 @@ public class Main {
         System.out.println("============================================\n");
 
         // Your Prototype demonstration here...
+        EnemyRegistry registry= new EnemyRegistry();
 
+        Goblin baseGoblin = new Goblin("Goblin Template");
+        registry.registerTemplate("goblin", baseGoblin);
+
+        // it is clone:
+        Goblin cloneGoblin = (Goblin) registry.createFromTemplate("goblin");
+        cloneGoblin.addAbility(new FrostBreath());
+        System.out.println("Original template abilities:" +baseGoblin.getAbilities().size());
+        System.out.println("Clone abilities:"+cloneGoblin.getAbilities().size());
 
         // ============================================================
         // PART 4: ALL PATTERNS WORKING TOGETHER
