@@ -134,7 +134,23 @@ public class Goblin implements Enemy {
 
     @Override
     public Enemy clone(){
-        throw  new UnsupportedOperationException("Not implemented yet");
+        Goblin copy = new Goblin(this.name);
+        copy.health=this.health;
+        copy.damage=this.damage;
+        copy.defense=this.defense;
+        copy.speed=this.speed;
+        copy.abilities=new ArrayList<>();
+        if (this.abilities!=null){
+            for (Ability a: this.abilities){
+                copy.abilities.add(a==null ? null : a.clone());
+            }
+        }
+        if (this.lootTable != null){
+            copy.lootTable = this.lootTable.clone();
+        }else {
+            copy.lootTable =null;
+        }
+        return copy;
     }
 
     // TODO: Add helper methods for Prototype variant creation
@@ -142,5 +158,17 @@ public class Goblin implements Enemy {
     // - void multiplyStats(double multiplier) — for Elite/Champion variants
     // - void addAbility(Ability ability) — for enhanced variants
     // - void setElement(String element) — for elemental variants
+
+    public void addAbility(Ability ability){
+        if (ability != null){
+            this.abilities.add(ability);
+        }
+    }
+    public void multiplyStats(double multiplier){
+        this.health= (int) Math.round(this.health * multiplier);
+        this.damage =(int) Math.round(this.damage*multiplier);
+        this.defense = (int) Math.round(this.defense * multiplier);
+        this.speed =(int) Math.round(this.speed * multiplier);
+    }
 
 }
