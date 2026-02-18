@@ -3,6 +3,7 @@ package com.narxoz.rpg;
 import com.narxoz.rpg.builder.BossEnemyBuilder;
 import com.narxoz.rpg.builder.EnemyDirector;
 import com.narxoz.rpg.combat.FrostBreath;
+import com.narxoz.rpg.enemy.DragonBoss;
 import com.narxoz.rpg.enemy.Enemy;
 import com.narxoz.rpg.enemy.Goblin;
 import com.narxoz.rpg.factory.EnemyComponentFactory;
@@ -159,6 +160,29 @@ public class Main {
         cloneGoblin.addAbility(new FrostBreath());
         System.out.println("Original template abilities:" +baseGoblin.getAbilities().size());
         System.out.println("Clone abilities:"+cloneGoblin.getAbilities().size());
+
+
+
+        // Dragon register
+        registry.registerTemplate("dragon", raidBoss);
+        Enemy eliteDragon =registry.createFromTemplate("dragon");
+        DragonBoss elite = (DragonBoss) eliteDragon;
+        elite.multiplyStats(2.0);
+
+
+        Enemy ancientDragon =registry.createFromTemplate("dragon");
+        DragonBoss ancient = (DragonBoss) ancientDragon;
+        ancient.multiplyStats(2.0);
+
+        ancient.multiplyStats(5.0);
+        ancient.addAbility(new FrostBreath());
+
+        System.out.println("\n--- Dragon Variants ---");
+        eliteDragon.displayInfo();
+        ancientDragon.displayInfo();
+        System.out.println("Template dragon abilities:" + raidBoss.getAbilities().size());
+        System.out.println("Ancient dragon abilities:" + ancientDragon.getAbilities().size());
+
 
         // ============================================================
         // PART 4: ALL PATTERNS WORKING TOGETHER
