@@ -15,7 +15,7 @@ import java.util.HashMap;
  * READ THIS CAREFULLY — THIS IS THE CORE LEARNING MOMENT!
  * ============================================================
  *
- * Look at this constructor. REALLY look at it.
+ * Look at this constructor. REA    LLY look at it.
  * Count the parameters. Imagine using it in Main.java.
  * Imagine a teammate trying to understand what each parameter means.
  *
@@ -170,7 +170,35 @@ public class DragonBoss implements Enemy {
     // That's the challenge of Prototype with complex objects.
     @Override
     public Enemy clone() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<Ability> abilitiesCopy = new ArrayList<>();
+        if (this.abilities != null){
+            for (Ability a: this.abilities){
+                abilitiesCopy.add(a == null ? null: a.clone());
+            }
+        }
+        Map<Integer,Integer> phasesCopy = new HashMap<>();
+        if (this.phases !=null){
+            phasesCopy.putAll(this.phases);
+        }
+        LootTable lootCopy = (this.lootTable==null) ? null: this.lootTable.clone();
+        int p1 =phasesCopy.getOrDefault(1,this.health);
+        int p2 =phasesCopy.getOrDefault(2,Math.max(1,this.health/2));
+        int p3 =phasesCopy.getOrDefault(3,Math.max(1,this.health/4));
+        return new DragonBoss(
+                this.name,
+                this.health,
+                this.damage,
+                this.defense,
+                this.speed,
+                this.element,
+                abilitiesCopy,
+                p1, p2, p3,
+                lootCopy,
+                this.aiBehavior,
+                this.canFly,
+                this.hasBreathAttack,
+                this.wingspan
+        );
     }
     @Override
     public int getDamage() {
@@ -186,7 +214,7 @@ public class DragonBoss implements Enemy {
     }
     @Override
     public List<Ability> getAbilities() {
-        return abilities;
+        return new ArrayList<>(abilities);
     }
     @Override
     public LootTable getLootTable() {
@@ -198,5 +226,22 @@ public class DragonBoss implements Enemy {
     // TODO: Add helper methods for variant creation
     // - void setElement(String element) — for elemental variants
     // - void multiplyStats(double multiplier) — for difficulty tiers
+
+    public void multiplyStats(double m) {
+        this.health = (int) Math.round(this.health *m);
+        this.damage = (int) Math.round(this.damage *m);
+        this.defense = (int) Math.round(this.defense*m);
+        this.speed = (int) Math.round(this.speed *m);
+        if (this.phases != null) {
+            for (Map.Entry<Integer,Integer> e : this.phases.entrySet()) {
+                e.setValue((int) Math.round(e.getValue() *m));
+            }
+        }
+    }
+    public void addAbility(Ability ability) {
+        if (ability ==null) return;
+        if (this.abilities == null) this.abilities= new ArrayList<>();
+        this.abilities.add(ability);
+    }
 
 }
