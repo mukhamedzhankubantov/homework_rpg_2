@@ -1,6 +1,7 @@
 package com.narxoz.rpg.builder;
 
 import com.narxoz.rpg.combat.Ability;
+import com.narxoz.rpg.enemy.BasicEnemy;
 import com.narxoz.rpg.enemy.Enemy;
 import com.narxoz.rpg.enemy.Goblin;
 import com.narxoz.rpg.loot.LootTable;
@@ -58,12 +59,13 @@ public class BasicEnemyBuilder implements EnemyBuilder{
 
 
     public EnemyBuilder setAbilities(List<Ability> abilities) {
-        this.abilities = abilities;
+        this.abilities = (abilities == null) ? new ArrayList<>() : new ArrayList<>(abilities);
         return this;
     }
 
     @Override
     public EnemyBuilder addAbility(Ability ability) {
+        if (ability != null) abilities.add(ability);
         return this;
     }
 
@@ -86,6 +88,14 @@ public class BasicEnemyBuilder implements EnemyBuilder{
 
     @Override
     public Enemy build() {
-        return new Goblin(name);
+        if (name == null || name.isBlank()) throw new IllegalStateException("Name is required");
+        if (health <= 0) throw new IllegalStateException("Health must be positive");
+        return new BasicEnemy(
+                name, health, damage, defense, speed,
+                element,
+                abilities,
+                lootTable,
+                aiBehavior
+        );
     }
 }

@@ -1,8 +1,10 @@
 package com.narxoz.rpg;
 
+import com.narxoz.rpg.builder.BasicEnemyBuilder;
 import com.narxoz.rpg.builder.BossEnemyBuilder;
 import com.narxoz.rpg.builder.EnemyDirector;
 import com.narxoz.rpg.combat.FrostBreath;
+import com.narxoz.rpg.enemy.BasicEnemy;
 import com.narxoz.rpg.enemy.DragonBoss;
 import com.narxoz.rpg.enemy.Enemy;
 import com.narxoz.rpg.enemy.Goblin;
@@ -126,9 +128,22 @@ public class Main {
 
         // Your Builder demonstration here...
         EnemyComponentFactory fireFactory = new FireComponentFactory();
-        EnemyDirector director = new EnemyDirector(new BossEnemyBuilder());
+        Enemy basic = new BasicEnemyBuilder()
+                .setName("Forest Goblin")
+                .setHealth(120)
+                .setDamage(20)
+                .setDefense(6)
+                .setSpeed(40)
+                .setElement("FIRE")
+                .setAbilities(fireFactory.createAbilities())
+                .setLootTable(fireFactory.createLootTable())
+                .setAI(fireFactory.createAIBehavior())
+                .build();
 
-        Enemy raidBoss = director.createRaidBoss(fireFactory);
+        basic.displayInfo();
+        System.out.println();
+
+        Enemy raidBoss = new EnemyDirector(new BossEnemyBuilder()).createRaidBoss(fireFactory);
         raidBoss.displayInfo();
 
 
