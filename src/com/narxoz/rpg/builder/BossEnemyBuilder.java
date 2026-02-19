@@ -65,7 +65,7 @@ public class BossEnemyBuilder implements EnemyBuilder{
     }
     @Override
     public EnemyBuilder setAbilities(List<Ability> abilities) {
-        this.abilities = (abilities == null) ? new ArrayList<>() : abilities;
+        this.abilities = (abilities == null) ? new ArrayList<>() : new ArrayList<>(abilities);
         return this;
     }
 

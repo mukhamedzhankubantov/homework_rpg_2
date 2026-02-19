@@ -24,7 +24,7 @@ public class ShadowLootTable implements LootTable{
 
     @Override
     public List<String> getItems(){
-        return this.items;
+        return List.copyOf(items);
     }
     @Override
     public int getGoldDrop(){

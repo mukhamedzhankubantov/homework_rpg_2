@@ -24,7 +24,7 @@ public class IceLootTable implements LootTable{
 
     @Override
     public List<String> getItems(){
-        return this.items;
+        return List.copyOf(items);
     }
     @Override
     public int getGoldDrop(){

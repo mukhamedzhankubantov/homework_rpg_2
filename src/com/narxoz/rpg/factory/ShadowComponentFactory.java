@@ -1,7 +1,6 @@
 package com.narxoz.rpg.factory;
 
 import com.narxoz.rpg.combat.*;
-import com.narxoz.rpg.loot.IceLootTable;
 import com.narxoz.rpg.loot.LootTable;
 import com.narxoz.rpg.loot.ShadowLootTable;
 

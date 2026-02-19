@@ -98,18 +98,23 @@ public class Goblin implements Enemy {
         // TODO: Display loot table
     }
 
+    @Override
     public int getDamage(){
         return this.damage;
     }
+    @Override
     public int getDefense(){
         return this.defense;
     }
+    @Override
     public int getSpeed(){
         return this.speed;
     }
+    @Override
     public List<Ability> getAbilities() {
-        return abilities;
+        return List.copyOf(abilities);
     }
+    @Override
     public LootTable getLootTable() {
         return lootTable;
     }
