@@ -8,6 +8,8 @@ import com.narxoz.rpg.enemy.Enemy;
 import com.narxoz.rpg.enemy.Goblin;
 import com.narxoz.rpg.factory.EnemyComponentFactory;
 import com.narxoz.rpg.factory.FireComponentFactory;
+import com.narxoz.rpg.factory.IceComponentFactory;
+import com.narxoz.rpg.factory.ShadowComponentFactory;
 import com.narxoz.rpg.prototype.EnemyRegistry;
 
 /**
@@ -78,6 +80,14 @@ public class Main {
         System.out.println("============================================\n");
 
         // Your Abstract Factory demonstration here...
+        EnemyComponentFactory fire = new FireComponentFactory();
+        EnemyComponentFactory ice = new IceComponentFactory();
+        EnemyComponentFactory shadow = new ShadowComponentFactory();
+
+        demoFactory("FIRE", fire);
+        demoFactory("ICE", ice);
+        demoFactory("SHADOW", shadow);
+
 
 
         // ============================================================
@@ -237,4 +247,18 @@ public class Main {
     // - displayEnemyDetails(Enemy enemy)
     // - demonstrateDeepCopy(Enemy original, Enemy clone)
     // - createThemeDemo(EnemyComponentFactory factory, String themeName)
+
+    private static void demoFactory(String name, EnemyComponentFactory factory){
+        System.out.println("---- "+ name +" THEME ---");
+        System.out.println("AI: "+ factory.createAIBehavior());
+
+        System.out.println("Abilities: ");
+        for (var a: factory.createAbilities()){
+            System.out.println(" - "+ a.getName() + " ("+ a.getDamage() +" ): "+a.getDescription());
+        }
+        var loot = factory.createLootTable();
+        System.out.println("Look items: "+loot.getItems());
+        System.out.println("Gold: "+ loot.getGoldDrop()+ ", EXP: "+ loot.getExperienceDrop());
+        System.out.println();
+    }
 }
