@@ -145,8 +145,16 @@ public class DragonBoss implements Enemy {
         System.out.println("Health: " + health + " | Damage: " + damage
                 + " | Defense: " + defense + " | Speed: " + speed);
         System.out.println("Element: " + element);
-        System.out.println("Abilities (" + abilities.size() + "):");
+        //System.out.println("Abilities (" + abilities.size() + "):");
         // TODO: Display each ability's details
+        System.out.println("Abilities (" + (abilities == null ? 0 : abilities.size()) + "):");
+        if (abilities != null){
+            for (Ability a : abilities){
+                if (a == null) continue;
+                System.out.println("  - " + a.getName() + " (" + a.getDamage() + "): " + a.getDescription());
+            }
+        }
+
         System.out.println("Boss Phases: " + phases.size());
         for (Map.Entry<Integer, Integer> phase : phases.entrySet()) {
             System.out.println("  Phase " + phase.getKey()
@@ -157,6 +165,13 @@ public class DragonBoss implements Enemy {
                 + " | Breath Attack: " + hasBreathAttack
                 + " | Wingspan: " + wingspan);
         // TODO: Display loot table
+        if (lootTable != null) {
+            System.out.println("Loot: " + lootTable.getItems()
+                    + " | Gold: " + lootTable.getGoldDrop()
+                    + " | EXP: " + lootTable.getExperienceDrop());
+        } else {
+            System.out.println("Loot: none");
+        }
     }
 
     // TODO: Implement clone() for Prototype pattern
