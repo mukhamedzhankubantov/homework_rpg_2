@@ -282,6 +282,13 @@ public class Main {
         System.out.println("Factory Method: build() method creates Enemy objects (inside builders/director flow).");
         System.out.println("Prototype: EnemyRegistry clones templates with deep copy to generate variants.");
 
+        System.out.println();
+        System.out.println("Extensibility:");
+        System.out.println("- New theme (Nature): add Nature abilities + NatureLootTable + NatureComponentFactory (no existing code changes).");
+        System.out.println("- New enemy type (Lich): create Lich enemy class + (optional) LichBossBuilder or reuse BossEnemyBuilder.");
+        System.out.println("- New difficulty tier (Mythic): clone from registry and multiplyStats(10.0) + add extra ability.");
+
+
         // TODO: Print a summary showing which patterns were demonstrated
         // Example:
         // System.out.println("Abstract Factory: Themed component families (Fire, Ice, Shadow)");
