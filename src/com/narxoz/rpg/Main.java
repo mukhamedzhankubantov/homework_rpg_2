@@ -182,7 +182,6 @@ public class Main {
 
         Enemy ancientDragon =registry.createFromTemplate("dragon");
         DragonBoss ancient = (DragonBoss) ancientDragon;
-        ancient.multiplyStats(2.0);
 
         ancient.multiplyStats(5.0);
         ancient.addAbility(new FrostBreath());
@@ -223,7 +222,28 @@ public class Main {
         System.out.println("============================================\n");
 
         // Your integration demonstration here...
+        EnemyComponentFactory shadowFactory = new ShadowComponentFactory();
+        Enemy shadowBoss = director.createRaidBoss(shadowFactory);
+        System.out.println("Template Shadow Boss:");
+        shadowBoss.displayInfo();
 
+        registry.registerTemplate("shadow-boss", shadowBoss);
+
+        Enemy shadowEliteEnemy  =registry.createFromTemplate("shadow-boss");
+        DragonBoss shadowElite = (DragonBoss) shadowEliteEnemy;
+        shadowElite.multiplyStats(2.0);
+
+        Enemy shadowMythicEnemy = registry.createFromTemplate("shadow-boss");
+        DragonBoss shadowMythic = (DragonBoss) shadowMythicEnemy;
+        shadowMythic.multiplyStats(5.0);
+        shadowMythic.addAbility(new FrostBreath());
+
+        System.out.println("\nCloned Shadow Variants: ");
+        shadowElite.displayInfo();
+        shadowMythic.displayInfo();
+
+        System.out.println("Template abilities: "+ shadowBoss.getAbilities().size());
+        System.out.println("Mythic abilities: "+ shadowMythic.getAbilities().size());
 
         // ============================================================
         // SUMMARY
@@ -232,6 +252,11 @@ public class Main {
         System.out.println("PATTERN SUMMARY");
         System.out.println("============================================");
         System.out.println();
+        System.out.println("Abstract Factory: Fire/Ice/Shadow factories create consistent themed abilities, loot, and AI.");
+        System.out.println("Builder: BossEnemyBuilder + Director construct complex enemies step-by-step.");
+        System.out.println("Factory Method: build() method creates Enemy objects (inside builders/director flow).");
+        System.out.println("Prototype: EnemyRegistry clones templates with deep copy to generate variants.");
+
         // TODO: Print a summary showing which patterns were demonstrated
         // Example:
         // System.out.println("Abstract Factory: Themed component families (Fire, Ice, Shadow)");
@@ -257,7 +282,7 @@ public class Main {
             System.out.println(" - "+ a.getName() + " ("+ a.getDamage() +" ): "+a.getDescription());
         }
         var loot = factory.createLootTable();
-        System.out.println("Look items: "+loot.getItems());
+        System.out.println("Loot items: "+loot.getItems());
         System.out.println("Gold: "+ loot.getGoldDrop()+ ", EXP: "+ loot.getExperienceDrop());
         System.out.println();
     }
