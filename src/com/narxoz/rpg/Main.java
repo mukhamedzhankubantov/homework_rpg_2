@@ -238,7 +238,8 @@ public class Main {
 
         // Your integration demonstration here...
         EnemyComponentFactory shadowFactory = new ShadowComponentFactory();
-        Enemy shadowBoss = director.createRaidBoss(shadowFactory);
+        Enemy shadowBoss = new EnemyDirector(new BossEnemyBuilder()).createRaidBoss(shadowFactory);
+
         System.out.println("Template Shadow Boss:");
         shadowBoss.displayInfo();
 
