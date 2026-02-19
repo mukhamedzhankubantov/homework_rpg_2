@@ -186,6 +186,15 @@ public class Main {
         System.out.println("Original template abilities:" +baseGoblin.getAbilities().size());
         System.out.println("Clone abilities:"+cloneGoblin.getAbilities().size());
 
+        registry.registerTemplate("basic", basic);
+
+        Enemy basicClone = registry.createFromTemplate("basic");
+        BasicEnemy basicCloneCasted = (BasicEnemy) basicClone;
+        basicCloneCasted.addAbility(new FrostBreath());
+
+        System.out.println("\n--- BasicEnemy Deep Copy Proof ---");
+        System.out.println("Template basic abilities: " + basic.getAbilities().size());
+        System.out.println("Clone basic abilities: " + basicClone.getAbilities().size());
 
 
         // Dragon register
